@@ -1,7 +1,7 @@
 #include <minkoValekInfoCentrumBitmaps.h>
 #include "driver/gpio.h"
 #include <rom/ets_sys.h>
-#include <TFT_eSPI.h> // Graphics and font library for ST7735 driver chip
+#include <TFT_eSPI.h> 
 #include <SPI.h>
 
 TFT_eSPI tft = TFT_eSPI();
@@ -32,7 +32,8 @@ uint16_t cursorColor = 0xF81F;
 int lightState = 1;
 bool case3Cleared = false;
 bool isInSettings = false;
-
+long randNumber;
+int lolChampNumber = 0;
 
 void setup() {
   //display setup
@@ -43,10 +44,9 @@ void setup() {
   pinMode(0, INPUT_PULLUP);
   pinMode(35, INPUT_PULLUP);
   //startup screen
-  //loadingScreen();
+  loadingScreen();
   //setup code
   mainMenuScreen();
-  osName();
 }
 
 void loop() {
@@ -56,76 +56,65 @@ void loop() {
       mainMenuScreen();
       positionOne(29, 22, 30, cursorColor);
       mainMenuPosition = 2;
-      osName();
       delay(100);
       break;
       case 2:
       mainMenuScreen();
       positionOne(71, 22, 30, cursorColor);
       mainMenuPosition = 3;
-      osName();
       delay(100);
       break;
       case 3:
       mainMenuScreen();
       positionOne(108, 22, 30, cursorColor);
       mainMenuPosition = 4;
-      osName();
       delay(100);
       break;
       case 4:
       mainMenuScreen();
       positionOne(148, 22, 30, cursorColor);
       mainMenuPosition = 5;
-      osName();
       delay(100);
       break;
       case 5:
       mainMenuScreen();
       positionOne(188, 22, 30, cursorColor);
       mainMenuPosition = 6;
-      osName();
       delay(100);
       break;
       case 6:
       mainMenuScreen();
       positionOne(27, 90, 30, cursorColor);
       mainMenuPosition = 7;
-      osName();
       delay(100);
       break;
       case 7:
       mainMenuScreen();
       positionOne(68, 90, 30, cursorColor);
       mainMenuPosition = 8;
-      osName();
       delay(100);
       break;
       case 8:
       mainMenuScreen();
       positionOne(108, 90, 30, cursorColor);
       mainMenuPosition = 9;
-      osName();
       delay(100);
       break;
       case 9:
       mainMenuScreen();
       positionOne(150, 88, 30, cursorColor);
       mainMenuPosition = 10;
-      osName();
       delay(100);
       break;
       case 10:
       mainMenuScreen();
       positionOne(185, 88, 30, cursorColor);
       mainMenuPosition = 11;
-      osName();
       delay(100);
       break;
       case 11:
       mainMenuScreen();
       mainMenuPosition = 1;
-      osName();
       delay(100);
       break;
 
@@ -138,6 +127,7 @@ void loop() {
 
   if(digitalRead(35) == 0 && isInSettings == false) {
     switch(mainMenuPosition) {
+      //light
       case 2:
       
         switch(lightState) {
@@ -158,47 +148,137 @@ void loop() {
       mainMenuScreen();
       delay(200);
       break;
-      
       case 3:
 
       printSettings();
       delay(200);
       break;
-
+      //lol champ roulette
       case 4:
+      clearScreen();
+      lolChampNumber = random(17);
+      //lolChampNumber = 16;
+      switch (lolChampNumber) {
+        case 1: 
+        tft.drawBitmap(60,7,cassiopeia, 120, 120, TFT_GREEN);
+        delay(200);
+        break;
+        case 2: 
+        tft.drawBitmap(60,7,diana, 124, 117, TFT_WHITE);
+        delay(200);
+        break;
+        case 3: 
+        tft.drawBitmap(60,7,jinx, 120, 120, TFT_BLUE);
+        delay(200);
+        break;
+        case 4: 
+        tft.drawBitmap(60,7,karma, 120, 120, TFT_GREEN);
+        delay(200);
+        break;
+        case 5: 
+        tft.drawBitmap(60,7,leona, 120, 120, TFT_YELLOW);
+        delay(200);
+        break;
+        case 6: 
+        tft.drawBitmap(60,7,lulu, 120, 120, TFT_PURPLE);
+        delay(200);
+        break;
+        case 7: 
+        tft.drawBitmap(60,7,morgana, 121, 119, TFT_PURPLE);
+        delay(200);
+        break;
+        case 8: 
+        tft.drawBitmap(60,7,nami, 122, 115, TFT_GREEN);
+        delay(200);
+        break;
+        case 9: 
+        tft.drawBitmap(60,7,neeko, 120, 120, TFT_PINK);
+        delay(200);
+        break;
+        case 10: 
+        tft.drawBitmap(60,7,senna, 120, 120, TFT_GREEN);
+        delay(200);
+        break;
+        case 11: 
+        tft.drawBitmap(60,7,sona, 120, 120, TFT_BLUE);
+        delay(200);
+        break;
+        case 12: 
+        tft.drawBitmap(60,7,syndra, 120, 120, TFT_PURPLE);
+        delay(200);
+        break;
+        case 13: 
+        tft.drawBitmap(60,7,veigar, 120, 120, TFT_PURPLE);
+        delay(200);
+        break;
+        case 14: 
+        tft.drawBitmap(60,7,velkoz, 116, 115, TFT_PINK);
+        delay(200);
+        break;
+        case 15: 
+        tft.drawBitmap(60,7,zyra, 121, 122, TFT_RED);
+        delay(200);
+        break;
+        case 16: 
+        tft.drawBitmap(60,7,soraka, 118, 115, TFT_PURPLE);
+        delay(200);
+        break;
+      }
 
       break;
-      
+      // wifi finder
       case 5:
-
+      clearScreen();
+      tft.drawBitmap(0,0,ladypopular, 240, 135, TFT_MAGENTA);
+      delay(200);
       break;
-
+      //loop
       case 6:
-
+      clearScreen();
+      tft.drawBitmap(0,0,happy, 240, 135, TFT_YELLOW);
+      delay(200);
       break;
-
+      //image
       case 7:
-      tft.setRotation(0);
-      displaySyndra(syndra0, 135, 240, 0, 0);
-      delay(100);
+      tft.setRotation(1);
+      while (mainMenuPosition == 7) {
+      clearScreen();
+      tft.drawBitmap(0,0,leona0, 240, 135, TFT_YELLOW);
+      delay(200);
+      clearScreen();
+      tft.drawBitmap(0,0,leona1, 240, 135, TFT_YELLOW);
+      delay(200);
+      }
       break;
-
+      // fire
       case 8:
-
+      clearScreen();
+      tft.drawBitmap(0,0,stvorica, 240, 135, TFT_WHITE);
+      delay(200);
       break;
-
+      //bug fix
       case 9:
-
+      tft.setRotation(1);
+      clearScreen();
+      mainMenuScreen();
+      isInSettings = false;
+      settingsPosition = 1;
+      mainMenuPosition = 1;
       break;
 
       case 10:
-
+      tft.setCursor(115, 62);
+      clearScreenW();
+      randNumber = random(7);
+      tft.println(randNumber);
+      delay(50);
       break;
-
+      //turn off screen
       case 11:
       tft.fillScreen(TFT_BLACK);
       delay(100);
       break;
+      // cycle
       default:
       delay(10);
       break;
@@ -263,26 +343,80 @@ void loop() {
       case 1:
 
       break;
+      //message
       case 2:
-      clearScreen();
+      clearScreenW();
+      tft.setCursor(0, 0);
+      tft.setTextColor(TFT_BLACK);
+      tft.println("");
+      tft.println("");
+      tft.println("Uzivaj 18tky");
+      tft.println("Pokoj od gormita");
+      tft.println("A maj pici ostatnych");
+      delay(200);
       break;
+      //cool stuff
       case 3:
-
+      clearScreen();
+      tft.setCursor(0, 0);
+      tft.setRotation(0);
+      tft.setTextColor(TFT_BLACK);
+      tft.drawBitmap(0,0,syndra0, 135, 240, TFT_MAGENTA);
+      delay(200);
       break;
+      //cat
       case 4:
-
+      tft.setCursor(0, 0);
+      clearScreenW();
+      delay(200);
       break;
+      //pointless info
       case 5:
-
+      clearScreenW();
+      tft.setCursor(0, 0);
+      tft.println(" Hours spent: 56h");
+      tft.println(" Lines of code: 509");
+      tft.println(" Number of bitmaps: 34");
+      tft.println(" ");
+      delay(200);
       break;
+      //technical info
       case 6:
-
+      clearScreenW();
+      tft.setCursor(0, 0);
+      tft.println(" CHIPSET: ESPRESSIF-ESP32 Xtensa");
+      tft.println(" DISPLAY: IPS ST7789V 1.14 Inch");
+      tft.println(" MAX DIST: 300m");
+      tft.println(" BLUETOOTH: YES");
+      tft.println(" WIFI: YES");
+      tft. setTextColor(TFT_MAGENTA);
+      tft.println(" OS: PavliiOS");
+      tft. setTextColor(TFT_BLACK);
+      tft.println(" BOARD: LilyGO TTGO");
+      tft.println(" CONNECTOR: USB-C");
+      delay(200);
       break;
+      //made by / for
       case 7:
-
+      clearScreenW();
+      tft.setCursor(0, 0);
+      tft.println("");
+      tft.println("");
+      tft.println("");
+      tft. setTextColor(TFT_RED);
+      tft.println("Made by: Martynezys");
+      tft. setTextColor(TFT_MAGENTA);
+      tft.println("Made for: pavlinaniejecool");
+      tft. setTextColor(TFT_BLACK);
+      delay(200);
       break;
+      //exit xd
       case 8:
-
+      tft.setRotation(1);
+      clearScreen();
+      mainMenuScreen();
+      delay(200);
+      isInSettings = false;
       break;
     }
   }
@@ -298,8 +432,12 @@ void clearScreenW() {
 }
 
 void mainMenuScreen() {
+  tft.setRotation(1);
   tft.drawBitmap(0,0,mainmenu, 240, 135, TFT_MAIN);
+  osName();
 }
+
+
 
 void printSettings() {
   clearScreenW();
@@ -307,12 +445,11 @@ void printSettings() {
   tft.setTextFont(2);
   isInSettings = true;
   tft.println("       Message:");
-  tft.println("       <3:");
-  tft.println("       Info:");
-  tft.println("       1:");
-  tft.println("       2:");
-  tft.println("       3:");
-  tft.println("       4:");
+  tft.println("       Cool Stuff:");
+  tft.println("       Cat:");
+  tft.println("       Pointless info:");
+  tft.println("       Technical info:");
+  tft.println("       Made by / for:");
   tft.println("       Exit:");
 }
 
@@ -346,22 +483,6 @@ void loadingScreen() {
   clearScreen();
 }
 
-
-void displaySyndra(const unsigned char *syndra0, int width, int height, int x, int y) {
-  for (int row = 0; row < height; row++) {
-    for (int col = 0; col < width; col++) {
-      int pixelIndex = (row * width + col) / 2; // Calculate pixel index
-      int pixelValue = pgm_read_byte(syndra0 + pixelIndex); // Read pixel value from PROGMEM
-
-      // Extract the 4-bit grayscale value
-      int grayscale = (pixelValue >> ((col % 2) * 4)) & 0x0F;
-
-      tft.drawPixel(x + col, y + row, tft.color565(grayscale * 16, grayscale * 16, grayscale * 16));
-    }
-  }
-}
-
-
 void osName() {
   tft. setTextColor(TFT_BLACK);
   tft.setCursor(95, 0, 2);
@@ -387,42 +508,3 @@ void positionTwo(int x, int y, int size, uint16_t cursorColor) {
   tft.drawLine(x, y, x, y + size - 1, cursorColor);
   tft.drawLine(x + size - 1, y, x + size - 1, y + size - 1, cursorColor);
 }
-
-
-/*
-  // Fill screen with grey so we can see the effect of printing with and without 
-  // a background colour defined
-  tft.fillScreen(TFT_GREY);
-  
-  // Set "cursor" at top left corner of display (0,0) and select font 2
-  // (cursor will move to next line automatically during printing with 'tft.println'
-  //  or stay on the line is there is room for the text with tft.print)
-  tft.setCursor(0, 0, 2);
-  // Set the font colour to be white with a black background, set text size multiplier to 1
-  tft.setTextColor(TFT_WHITE,TFT_BLACK);  tft.setTextSize(1);
-  // We can now plot text on screen using the "print" class
-  tft.println("Hello World!");
-  
-  // Set the font colour to be yellow with no background, set to font 7
-  tft.setTextColor(TFT_YELLOW); tft.setTextFont(2);
-  tft.println(1234.56);
-  
-  // Set the font colour to be red with black background, set to font 4
-  tft.setTextColor(TFT_RED,TFT_BLACK);    tft.setTextFont(4);
-  tft.println((long)3735928559, HEX); // Should print DEADBEEF
-
-  // Set the font colour to be green with black background, set to font 2
-  tft.setTextColor(TFT_GREEN,TFT_BLACK);
-  tft.setTextFont(2);
-  tft.println("Groop");
-
-  // Test some print formatting functions
-  float fnumber = 123.45;
-   // Set the font colour to be blue with no background, set to font 2
-  tft.setTextColor(TFT_BLUE);    tft.setTextFont(2);
-  tft.print("Float = "); tft.println(fnumber);           // Print floating point number
-  tft.print("Binary = "); tft.println((int)fnumber, BIN); // Print as integer value in binary
-  tft.print("Hexadecimal = "); tft.println((int)fnumber, HEX); // Print as integer number in Hexadecimal
-
-  while(1) yield(); // We must yield() to stop a watchdog timeout.
-  */
